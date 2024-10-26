@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "books"
+version = "0.1.0"
+description = ""
+authors = ["Alina <fakherdinova.alya@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.1.2"
+psycopg2 = "^2.9.10"
+pydantic-config = "^0.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
