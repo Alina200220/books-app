@@ -1,4 +1,5 @@
 # Определение версии Docker Compose и начало описания сервисов
+#command: ["sh", "-c", "./.venv/bin/python ./backend/manage.py migrate && ./.venv/bin/python ./backend/manage.py runserver 0.0.0.0:8000"]
 version: “3”
 services:
    db:
@@ -11,7 +12,7 @@ services:
        - "5432:5432"
    web:
      build: . 
-     command: ["sh", "-c", "./.venv/bin/python ./backend/manage.py migrate && ./.venv/bin/python ./backend/manage.py runserver 0.0.0.0:8000"]
+     command: ["sh", "-c", "/app/.venv/bin/python ./backend/manage.py migrate && /app/.venv/bin/python ./backend/manage.py runserver 0.0.0.0:8000"]
      volumes:
        - .:/backend
      ports:

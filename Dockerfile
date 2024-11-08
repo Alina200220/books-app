@@ -9,11 +9,19 @@
 #ENV PATH="${PATH}:/root/.local/bin"
 #RUN poetry install
 
+#FROM python:3
+#ENV PYTHONUNBUFFERED 1
+#WORKDIR /usr/src/backend
+#COPY . .
+#COPY poetry.lock pyproject.toml ./
+#RUN pip install -U pip && \
+#   pip install poetry && \
+#   poetry install
+
 FROM python:3
-ENV PYTHONUNBUFFERED 1
-WORKDIR /usr/src/backend
+WORKDIR /app
+COPY pyproject.toml poetry.lock ./
+RUN pip install poetry
+RUN poetry config virtualenvs.in-project true
+RUN poetry install --no-root
 COPY . .
-COPY poetry.lock pyproject.toml ./
-RUN pip install -U pip && \
-   pip install poetry && \
-   poetry install
