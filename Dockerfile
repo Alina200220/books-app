@@ -14,7 +14,7 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /usr/src/backend
 COPY . .
 COPY poetry.lock pyproject.toml ./
-ENV PATH="${PATH}:/root/.poetry/bin"
+RUN . venv/bin/activate
 RUN pip install -U pip && \
    pip install poetry && \
    poetry install
