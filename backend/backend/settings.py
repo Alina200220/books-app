@@ -27,7 +27,7 @@ SECRET_KEY = settings.secret_key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'booksapp'
+    'crispy_forms',
+    'booksapp',
+    'users',
+    'crispy_bootstrap4',
+    'django.contrib.postgres'
 ]
 
 MIDDLEWARE = [
@@ -80,10 +84,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'BooksDatabase',
-        'USER': settings.db_user,
-        'PASSWORD': settings.db_password,
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'USER': settings.POSTGRES_USER,
+        'PASSWORD': settings.POSTGRES_PASSWORD,
+        'HOST': 'db',
+        'PORT': "5432",
     }
 }
 
@@ -127,3 +131,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'home-page'
+LOGIN_URL = 'login'

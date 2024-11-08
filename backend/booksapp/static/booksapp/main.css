@@ -25,6 +25,7 @@ ul {
   background-color: #6699cc;
 }
 
+
 .site-header .navbar-nav .nav-link {
   color: #cbd5db;
 }
@@ -34,7 +35,7 @@ ul {
 }
 
 .site-header .navbar-nav .nav-link.active {
-  font-weight: 500;
+  font-weight: 00;
 }
 
 .content-section {

@@ -10,6 +10,9 @@ python = "^3.12"
 django = "^5.1.2"
 psycopg2 = "^2.9.10"
 pydantic-config = "^0.3.0"
+django-crispy-forms = "^2.3"
+crispy-bootstrap4 = "^2024.10"
+django-contrib-postgres = "^0.0.1"
 
 
 [build-system]

@@ -1,0 +1,23 @@
+# Определение версии Docker Compose и начало описания сервисов
+version: “3”
+services:
+   db:
+     image: postgres
+     environment:
+       - POSTGRES_DB=BooksDatabase
+       - POSTGRES_USER=postgres
+       - POSTGRES_PASSWORD=123456
+     ports:
+       - "5432:5432"
+   web:
+     build: . 
+     command: ./.venv/bin/python ./backend/manage.py runserver 0.0.0.0:8000
+     volumes:
+       - .:/backend
+     ports:
+       - "8000:8000"
+     env_file:
+       - ./.env
+     depends_on:
+       - db
+

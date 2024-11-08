@@ -6,8 +6,8 @@ class Settings(BaseSettings):
     class Config:
         env_file = find_dotenv(".env")
 
-    db_user:str 
-    db_password:str
+    POSTGRES_USER:str 
+    POSTGRES_PASSWORD:str
     secret_key:str
 
 settings = Settings()
