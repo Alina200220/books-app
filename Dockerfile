@@ -14,8 +14,6 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /usr/src/backend
 COPY . .
 COPY poetry.lock pyproject.toml ./
-ENV PATH="./.venv/bin:$PATH"
 RUN pip install -U pip && \
    pip install poetry && \
-   poetry config virtualenvs.create false && \
    poetry install
