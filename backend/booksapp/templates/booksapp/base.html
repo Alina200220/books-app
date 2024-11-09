@@ -32,8 +32,17 @@
             </div>
             <!-- Правая часть навигационной панели -->
             <div class="navbar-nav">
-              <a class="nav-item nav-link" href="{% url 'login' %}">Вход</a>
-              <a class="nav-item nav-link" href="{% url 'register-page' %}">Регистрация</a>
+              {% if user.is_authenticated %}
+            	<a class="nav-item nav-link" href="{% url 'profile' %}">Профиль</a>
+            	<!--a class="nav-item nav-link" href="{% url 'logout' %}">Выход</a-->
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button class="btn btn-outline-light" type="submit">Выход</button>
+              </form>
+          	{% else %}
+            	<a class="nav-item nav-link" href="{% url 'login' %}">Вход</a>
+            	<a class="nav-item nav-link" href="{% url 'register' %}">Регистрация</a>
+          	{% endif %}
             </div>
           </div>
         </div>

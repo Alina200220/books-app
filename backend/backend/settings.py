@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'BooksDatabase',
         'USER': settings.POSTGRES_USER,
         'PASSWORD': settings.POSTGRES_PASSWORD,
-        'HOST': 'db',
+        'HOST': 'localhost', #тут db
         'PORT': "5432",
     }
 }
@@ -136,3 +136,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'home-page'
 LOGIN_URL = 'login'
+#LOGOUT_REDIRECT_URL = 'login'
+#LOGOUT_URL = 'logout'
