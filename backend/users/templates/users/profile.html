@@ -3,12 +3,21 @@
 {% block content %}
     <div class="content-section">
       <div class="media">
-        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
         <div class="media-body">
           <h2 class="account-heading">{{ user.username }}</h2>
           <p class="text-secondary">{{ user.email }}</p>
+          <h2>Выбранные книги</h2>
+            <ul>
+                {% for book in books %}
+                    <li><p>Название: {{ book.book.book_title }}</p>
+                        <p>Автор: {{ book.book.book_author }} </p></li>
+                {% empty %}
+                    <li>Нет прочитанных книг.</li>
+                {% endfor %}
+            </ul>
         </div>
       </div>
-      <!-- Здесь будет форма -->
+    </div>
+    </form>
     </div>
 {% endblock content %}

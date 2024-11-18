@@ -17,10 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from users import views as user_views
+from ajax_select import urls as ajax_select_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
-    path('', include('booksapp.urls'))
+    path('', include('booksapp.urls')),
+    path("users/lookups/", include(ajax_select_urls)),
     
 ]

@@ -1,0 +1,24 @@
+{% extends "booksapp/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить книгу</title>
+</head>
+<body>
+    <h1>Добавить прочитанную книгу</h1>
+    <p></p>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-dark" type="submit">Добавить книгу</button>
+        </div>
+    </form>
+    
+</body>
+</html>
+{% endblock content %}

@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 from .config import Settings
 
@@ -43,7 +44,8 @@ INSTALLED_APPS = [
     'booksapp',
     'users',
     'crispy_bootstrap4',
-    'django.contrib.postgres'
+    'django.contrib.postgres',
+    'ajax_select'
 ]
 
 MIDDLEWARE = [
@@ -126,6 +128,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # Убедитесь, что путь правильный
+]
+
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
