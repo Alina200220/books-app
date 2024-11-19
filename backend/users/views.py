@@ -11,6 +11,7 @@ from users.models import Book_User
 from booksapp.models import Books
 from .forms import BookForm, UserRegisterForm
 from django.contrib.auth import logout
+from django.templatetags.static import static
 
 
 
@@ -64,7 +65,8 @@ def profile_view(request):
 
 def download_image() -> list[str]:
     #save_dir = r'C:\Users\Alina\Desktop\Books\images'
-    save_dir = r'C:\Users\Alina\Desktop\Books\backend\users\static\users\images'
+    #save_dir = r'C:\Users\Alina\Desktop\Books\backend\users\static\users\images'
+    save_dir = r'.\users\static\users\images'
     queryset = Books.objects.raw('SELECT * FROM booksapp_books ORDER BY RANDOM() LIMIT 115')
     queryset = random.sample(list(queryset), 3)
     #предварительно очищаем директорию

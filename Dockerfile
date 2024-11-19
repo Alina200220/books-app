@@ -18,10 +18,15 @@
 #   pip install poetry && \
 #   poetry install
 
-FROM python:3
+FROM python:3.12
 WORKDIR /app
-COPY pyproject.toml poetry.lock ./
-RUN pip install poetry
-RUN poetry config virtualenvs.in-project true
-RUN poetry install --no-root
+COPY requirements.txt ./
+# Установите зависимости
+#COPY ./requirements.txt .
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
 COPY . .
+#COPY app/pyproject.toml app/poetry.lock* /app/
+#RUN poetry config virtualenvs.in-project false
+#RUN poetry install $(test "$MY_ENV" == env && echo "--no-dev")
+#RUN poetry install --no-root
