@@ -9,7 +9,7 @@ from django.contrib import messages
 import requests
 from users.models import Book_User
 from booksapp.models import Books
-from .forms import BookForm, UserRegisterForm
+from .forms import BookCreationForm, BookForm, UserRegisterForm
 from django.contrib.auth import logout
 from django.templatetags.static import static
 
@@ -83,13 +83,9 @@ def download_image() -> list[str]:
         headers = { 'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:70.0) Gecko/20100101 Firefox/70.0'}
         # Скачиваем изображение
         response = requests.get(headers=headers, url=one_book.image_url_l)
-        print(response.status_code)
         if response.status_code == 200:
             with open(filename, 'wb') as f:
                 f.write(response.content)
-            print(f"Изображение сохранено: {filename}")
-        else:
-            print(f"Не удалось скачать изображение: {one_book.image_url_s}")
     return queryset, result_dict
     #urls = os.listdir('images')
     #print(urls)
@@ -104,27 +100,29 @@ def book_search(request):
     for k, v in result_dict.items():
         titles.append(k)
         images.append(v.split('\\')[-1])
-    print(images)
-    #titles = [one_book.book_title for one_book in queryset]
-    #print(titles)
-    #images = os.listdir(r'C:\Users\Alina\Desktop\Books\backend\users\static\users\images')
+    books = Books.objects.all()
+    form = BookForm(request.POST)
     if request.method == 'POST':
-        if 'search' in request.POST:  # Проверяем, была ли нажата кнопка поиска
-            form = BookForm(request.POST)
-            if form.is_valid():
-                query = form.cleaned_data['query']
-                results = Books.objects.filter(book_title__icontains=query)
-                form.fields['book'].queryset = results
-        elif 'select' in request.POST:  # Проверяем, была ли нажата кнопка выбора книги
-            form = BookForm(request.POST)
-            selected_book = form.data.get('book') #достаем айди выбранной книги
-            #print(selected_book)
-            if selected_book:
+        if form.is_valid():
+            selected_book_title = form.data.get('book') #достаем айди выбранной книги
+            print(selected_book_title)
+            if selected_book_title:
+                matched_books = Books.objects.filter(book_title__istartswith=selected_book_title)
+                print(matched_books)
                 # Сохраняем книгу в базу данных пользователя
                 # Сохраняем запись в модели User_Book
-                Book_User.objects.create(user=request.user, book_id=selected_book)
+                Book_User.objects.create(user=request.user, book_id=matched_books[0].id)
                 return redirect('home-page')  # Перенаправляем на страницу поиска после добавления
-    return render(request, 'users/home.html', {'form': form, 'results': results, 'files':images, 'titles':titles})
+        else:
+            print("form is invalid")
+    return render(request, 'users/home.html', {'form': form, 'results': results, 'files':images, 'titles':titles, 'books':books})
+
+
+def home(request):
+    books = Books.objects.all()
+    return render(request, 'users/home.html', {'books': books})
+
+
 
 
 

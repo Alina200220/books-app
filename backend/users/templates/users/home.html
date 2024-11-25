@@ -2,25 +2,25 @@
 {% load crispy_forms_tags %}
 {% block content %}
 {% load static %}
-
 <body> 
-     <form method="post">
-         {% csrf_token %} 
-         <div class="form-group mb-2">
-            {{ form.query|as_crispy_field }}  <!-- Используем crispy для отображения поля -->
-        </div>
-        <button class="btn btn-outline-dark" type="submit" name="search">Поиск</button> 
-    </form>
-{% if results %}
-    <form method="post" name="book">
+    <div class="container px-4 border border-dark">
+        <p></p>
+    <form action="{% url 'home-page' %}" method="POST">
         {% csrf_token %}
-        {{ form.book|as_crispy_field }} 
-        <button class="btn btn-outline-dark" type="submit" name="select">Выбрать книгу</button>
+        {{ form.book|as_crispy_field }}
+        <datalist id="books">
+            {% for book in books %}
+                <option value="{{ book.book_title }}"></option>
+            {% endfor %}
+        </datalist>
+        <p></p>
+        <button class="btn btn-outline-dark" type="submit" name="select">Добавить книгу</button>
+        <p></p>
     </form>
-{% endif %}
+    </div>
 <p></p>
-<div class="container px-4">
-    <h1>Популярные книги</h1>
+<div class="container px-4 ">
+    <h2 class="text-center">Популярные книги</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4"> <!-- Изменено на g-4 для отступов -->
         {% for file in files %}
 
@@ -35,4 +35,6 @@
         {% endfor %}
     </div>
 </div>
+<p></p>
 {% endblock content %} 
+</body>
