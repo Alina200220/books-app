@@ -35,6 +35,22 @@
         {% endfor %}
     </div>
 </div>
+<div class="container px-4 ">
+    <h2 class="text-center">Рекоммендованные книги</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4"> <!-- Изменено на g-4 для отступов -->
+        {% for file in files_recomm %}
+
+        <div class="col"> <!-- Оберните карточку в col для правильного отображения -->
+            <div class="card p-3 border bg-light">
+                <img src="{% static 'users/images/'|add:file %}" class="card-img-top" alt="..." style="width: 100%; height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <p class="card-text">{{ titles_recomm|slice:forloop.counter|last }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 <p></p>
 {% endblock content %} 
 </body>
